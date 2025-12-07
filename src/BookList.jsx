@@ -3,7 +3,7 @@ import BookItem from "./BookItem";
 const BookList = () => {
   return (
     <>
-      <BookItem />  
+      <BookItem />
     </>
   );
 };
