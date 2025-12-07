@@ -1,15 +1,49 @@
-const AddBook = () => {
+import { useState } from "react";
+
+const AddBook = ({ onBookAdd, bookData }) => {
+  const [input, setInput] = useState({
+    title: "",
+    category: "",
+  });
+
+  const handleInput = (e) => {
+    setInput((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleBookAdd = (e) => {
+    e.preventDefault();
+    onBookAdd({ ...bookData, title: input.title, category: input.category });
+    setInput({
+      title: "",
+      category: "",
+    });
+  };
+
   return (
     <>
       <div>
         <div className="BookAddSection ">
-          <form className="flex gap-3 justify-center my-8">
+          <form
+            onSubmit={handleBookAdd}
+            className="flex gap-3 justify-center my-8"
+          >
             <input
+              name="title"
+              onChange={handleInput}
+              value={input.title}
               type="text"
               placeholder="Enter your book..."
               className="border border-gray-400 rounded-md p-2 w-64 bg-gray-600/80"
             />
-            <select className="border border-gray-400 rounded-md p-2 w-100% ">
+            <select
+              name="category"
+              value={input.category}
+              onChange={handleInput}
+              className="border border-gray-400 rounded-md p-2 w-100% "
+            >
               <option className="bg-gray-700 p-4" value="">
                 Select a category
               </option>
