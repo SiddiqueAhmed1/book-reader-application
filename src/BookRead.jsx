@@ -5,15 +5,7 @@ import FilterBook from "./FilterBook";
 import Header from "./Header";
 
 const BookRead = () => {
-  const [bookData, setBookAdd] = useState([
-    {
-      id: 1,
-      title: "Imaner Dabi",
-      author: "Maolana Saber Abdullah",
-      review: 4,
-      isRead: true,
-    },
-  ]);
+  const [bookData, setBookAdd] = useState([]);
 
   return (
     <>

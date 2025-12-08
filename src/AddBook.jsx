@@ -15,7 +15,14 @@ const AddBook = ({ onBookAdd, bookData }) => {
 
   const handleBookAdd = (e) => {
     e.preventDefault();
-    onBookAdd({ ...bookData, title: input.title, category: input.category });
+    if (!input.title || !input.category) {
+      return alert("All fields are required!");
+    }
+
+    onBookAdd([
+      ...bookData,
+      { id: crypto.randomUUID(), title: input.title, category: input.category },
+    ]);
     setInput({
       title: "",
       category: "",
