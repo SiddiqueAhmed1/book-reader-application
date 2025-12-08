@@ -1,9 +1,9 @@
 import BookItem from "./BookItem";
 
-const BookList = ({ bookData }) => {
+const BookList = ({ bookData, onBookAdd }) => {
   return (
     <>
-      <BookItem bookData={bookData} />
+      <BookItem bookData={bookData} onBookAdd={onBookAdd} />
     </>
   );
 };

@@ -1,7 +1,18 @@
 import { Fragment } from "react";
 import ReactStars from "react-stars";
 
-const BookItem = ({ bookData }) => {
+const BookItem = ({ bookData, onBookAdd }) => {
+  // handle delete book
+  const handleDeleteBook = (id) => {
+    onBookAdd(bookData.filter((book) => book.id !== id));
+  };
+
+  // hanlde star value
+  const handleStarValue = ({ newRating }) => {
+    onBookAdd(() => []);
+    console.log(newRating);
+  };
+
   return (
     <>
       <div>
@@ -19,12 +30,15 @@ const BookItem = ({ bookData }) => {
 
                     <div className="rating flex items-center gap-3  w-[30%]">
                       <ReactStars
+                        onChange={(newRating) =>
+                          handleStarValue({ newRating, book })
+                        }
                         count={5}
                         size={28}
                         value={book.review}
                         className="text-center"
                       />
-                      <span>{book.review}/5</span>
+                      <span>{book.review > 0 ? book.review : 0}/5</span>
                     </div>
                     <div className=" w-[15%]">
                       {book.isRead === false ? (
@@ -37,7 +51,10 @@ const BookItem = ({ bookData }) => {
                         </button>
                       )}
                     </div>
-                    <button className="bg-red-600 py-1 w-[20%] cursor-pointer px-4 border border-red-600 hover:bg-red-700 rounded-md text-xl ">
+                    <button
+                      onClick={() => handleDeleteBook(book.id)}
+                      className="bg-red-600 py-1 w-[20%] cursor-pointer px-4 border border-red-600 hover:bg-red-700 rounded-md text-xl "
+                    >
                       Remove
                     </button>
                   </div>
