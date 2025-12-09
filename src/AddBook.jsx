@@ -31,9 +31,7 @@ const AddBook = ({ onBookAdd, bookData }) => {
       review: null,
     };
 
-    const jsonBook = JSON.stringify(newBook);
-
-    localStorage.setItem("Book", jsonBook);
+    localStorage.setItem("Book", JSON.stringify(newBook));
 
     const bookFromLocal = JSON.parse(localStorage.getItem("Book"));
 
