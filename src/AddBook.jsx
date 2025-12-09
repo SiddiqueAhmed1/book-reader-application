@@ -6,6 +6,7 @@ const AddBook = ({ onBookAdd, bookData }) => {
     category: "",
   });
 
+  // take input state
   const handleInput = (e) => {
     setInput((prev) => ({
       ...prev,
@@ -15,14 +16,31 @@ const AddBook = ({ onBookAdd, bookData }) => {
 
   const handleBookAdd = (e) => {
     e.preventDefault();
+
+    // input validation
     if (!input.title || !input.category) {
       return alert("All fields are required!");
     }
 
-    onBookAdd([
-      ...bookData,
-      { id: crypto.randomUUID(), title: input.title, category: input.category },
-    ]);
+    // add new book
+    const newBook = {
+      id: crypto.randomUUID(),
+      title: input.title,
+      category: input.category,
+      isRead: false,
+      review: null,
+    };
+
+    const jsonBook = JSON.stringify(newBook);
+
+    localStorage.setItem("Book", jsonBook);
+
+    const bookFromLocal = JSON.parse(localStorage.getItem("Book"));
+
+    // update the bookData state
+    onBookAdd([...bookData, bookFromLocal]);
+
+    // empty input after submit form
     setInput({
       title: "",
       category: "",
