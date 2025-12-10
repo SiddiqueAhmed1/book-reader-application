@@ -31,12 +31,8 @@ const AddBook = ({ onBookAdd, bookData }) => {
       review: null,
     };
 
-    localStorage.setItem("Book", JSON.stringify(newBook));
-
-    const bookFromLocal = JSON.parse(localStorage.getItem("Book"));
-
     // update the bookData state
-    onBookAdd([...bookData, bookFromLocal]);
+    onBookAdd([...bookData, newBook]);
 
     // empty input after submit form
     setInput({
