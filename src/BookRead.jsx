@@ -6,22 +6,25 @@ import Header from "./Header";
 
 const BookRead = () => {
   const [bookData, setBookAdd] = useState([]);
+  const [showReadUnread, setShowReadUnread] = useState({
+    read: null,
+    unread: null,
+    all: null,
+  });
 
-  // handle all book
-  const handleAllBook = () => {
-    return bookData;
+  // show read book handler
+  const isRead = () => {
+    setShowReadUnread({ read: true, unread: false, all: false });
   };
 
-  // handle read book
-  const handleReadBook = () => {
-    setBookAdd(bookData.filter((book) => book.isRead === true));
+  // show unread book handler
+  const isUnRead = () => {
+    setShowReadUnread({ unread: true, read: false, all: false });
   };
 
-  // handle unread book
-  const handleUnReadBook = () => {
-    setBookAdd(
-      bookData.filter((book) => (book.isRead === false ? { ...book } : book))
-    );
+  // show all book hanlder
+  const allBook = () => {
+    setShowReadUnread({ all: true, unread: false, read: false });
   };
 
   return (
@@ -29,12 +32,12 @@ const BookRead = () => {
       <div>
         <Header />
         <AddBook bookData={bookData} onBookAdd={setBookAdd} />
-        <FilterBook
-          handleAllBook={handleAllBook}
-          handleReadBook={handleReadBook}
-          handleUnReadBook={handleUnReadBook}
+        <FilterBook isRead={isRead} isUnRead={isUnRead} allBook={allBook} />
+        <BookList
+          showReadUnread={showReadUnread}
+          bookData={bookData}
+          onBookAdd={setBookAdd}
         />
-        <BookList bookData={bookData} onBookAdd={setBookAdd} />
       </div>
     </>
   );
