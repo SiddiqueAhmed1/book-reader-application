@@ -1,5 +1,10 @@
-# Book Reading Application
-
-### Here we can add, delete, review and filter books based on is book alread read or unread.
+# 📚Book Reading Application
 
 ### I have used React.js to complete the application and structure the component hiererchy in excalidraw.
+
+### Features
+
+- add book
+- delete book
+- starReview book
+- filter book
